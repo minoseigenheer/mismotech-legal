@@ -17,7 +17,7 @@
   <h1>Privacy Policy</h1>
   <p class="meta">App: <strong>Battery Remote</strong> &nbsp;|&nbsp; Developer: <strong>MISMOtech Minos Eigenheer</strong> &nbsp;|&nbsp; Last updated: May 30, 2026</p>
 
-  <p>This Privacy Policy explains how <strong>MISMOtech Minos Eigenheer</strong> ("we", "us", or "our") collects, uses, and protects your information when you use the <strong>Battery Remote</strong> iOS application.</p>
+  <p>This Privacy Policy explains how <strong>MISMOtech - Minos Eigenheer</strong> ("we", "us", or "our") collects, uses, and protects your information when you use the <strong>Battery Remote</strong> application.</p>
 
   <h2>1. Information We Collect</h2>
   <h3>Account &amp; Authentication Data</h3>
@@ -28,14 +28,17 @@
 
   <h3>Location Data</h3>
   <ul>
-    <li>The app retrieves the last known location of your EV via a cloud function. This data originates from your vehicle and is stored in your personal Firestore database.</li>
-    <li>We do <strong>not</strong> continuously track your personal device location.</li>
+    <li>The app retrieves the location of your tracker device via a Particle Cloud publish event.</li>
+    <li>Particle Cloud publish events are transient (TTL ~60 seconds in the cloud event stream)</li>
+    <li>Location information and device vitals are retained by Particle for up to <strong>1 month</strong>.</li>
   </ul>
 
-  <h3>Vehicle &amp; Usage Data</h3>
+  <h3>Device &amp; Usage Data</h3>
   <ul>
-    <li>Battery level, charging state, mileage, warnings, and other telemetry data transmitted from your EV.</li>
-    <li>Logs and events you generate within the app (e.g. charge sessions, warnings).</li>
+    <li>Battery level, charging state, warnings, and other telemetry data transmitted from your device.</li>
+    <li>Logs and events you enable in the app (e.g. charge sessions, warnings, motion events...) get published to a Firestore database.</li>
+    <li>Logs are stored for 90 days and can be accessed by the owner of the device and all users you grant access to.</li>
+    <li>We do not collect any personally identifiable information from these logs.</li>
   </ul>
 
   <h3>Push Notifications</h3>
@@ -46,8 +49,8 @@
   <h2>2. How We Use Your Information</h2>
   <ul>
     <li>To authenticate you and secure access to your account.</li>
-    <li>To display real-time and historical EV data on your dashboard.</li>
-    <li>To send push notifications about your vehicle's status.</li>
+    <li>To display real-time and historical battery data on your dashboard.</li>
+    <li>To send push notifications about your device's status.</li>
     <li>To improve app reliability and diagnose technical issues.</li>
   </ul>
   <p>We do <strong>not</strong> sell, rent, or share your personal information with third parties for marketing purposes.</p>
@@ -61,7 +64,8 @@
     <li><a href="https://firebase.google.com/support/privacy" target="_blank">Google Firebase</a> (authentication, database, cloud functions, push notifications)</li>
     <li><a href="https://policies.google.com/privacy" target="_blank">Google Sign-In</a></li>
     <li><a href="https://www.apple.com/legal/privacy/" target="_blank">Apple Sign In</a></li>
-    <li><a href="https://cloud.google.com/maps-platform/terms" target="_blank">Google Maps</a> (for displaying EV location)</li>
+    <li><a href="https://cloud.google.com/maps-platform/terms" target="_blank">Google Maps</a> (for displaying device location)</li>
+    <li><a href="https://www.particle.io/legal/privacy/" target="_blank">Particle Industries</a> (IoT device cloud — event transport and device vitals, retained up to 1 month)</li>
   </ul>
 
   <h2>5. Data Retention</h2>
