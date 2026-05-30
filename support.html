@@ -12,6 +12,7 @@
     .meta { color: #888; font-size: 0.9em; margin-bottom: 2em; }
     .faq-q { font-weight: 600; margin-top: 1.2em; }
     .faq-a { margin-top: 0.2em; }
+    .warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 8px 12px; margin-top: 0.4em; border-radius: 4px; }
   </style>
 </head>
 <body>
@@ -26,6 +27,129 @@
   <a href="mailto:minoseigenheer@gmail.com">minoseigenheer@gmail.com</a></p>
   <p>We aim to respond within <strong>2 business days</strong>.</p>
 
+  <h2>Getting Started – Adding a Device</h2>
+
+  <p class="faq-q">How do I add a device to my account?</p>
+  <p class="faq-a">
+    To add a tracker to your account, go to the <strong>Devices</strong> tab and tap the <strong>+</strong> button.
+    You will be prompted to enter the <strong>serial number</strong> printed on the label of your tracker.
+    The app uses the serial number to look up the unique device ID in the system — no manual ID entry is needed.
+    Once found, the device will be added to your account and will appear on your dashboard.
+  </p>
+
+  <p class="faq-q">I entered the serial number but the device was not found.</p>
+  <p class="faq-a">
+    Make sure you enter the serial number exactly as printed (including any capital letters).
+    The tracker must have been registered in the system before it can be paired.
+    If the problem persists, contact support with your serial number and we will check the registration status.
+  </p>
+
+  <h2>Account Management</h2>
+
+  <p class="faq-q">How do I delete my account and data?</p>
+  <p class="faq-a">
+    You can delete your account directly in the app. Go to <strong>Settings → Account → Delete Account</strong>.
+    You will be asked to confirm the deletion. Once confirmed, your account and all associated data are permanently removed.
+    This action cannot be undone.
+  </p>
+
+  <p class="faq-q">I forgot my password.</p>
+  <p class="faq-a">On the login screen, tap <strong>"Forgot password?"</strong> and enter your email address. You will receive a reset link by email. If you signed in with Google or Apple, use those services to manage your credentials.</p>
+
+  <h2>Access &amp; Sharing</h2>
+
+  <p class="faq-q">How do I grant another user access to my device?</p>
+  <p class="faq-a">
+    Open the device you want to share and go to <strong>Device Settings → Access</strong>.
+    Tap <strong>Add User</strong> and enter the email address of the person you want to invite.
+    You can assign them one of two roles:
+  </p>
+  <ul>
+    <li><strong>Viewer</strong> – can see live data and history but cannot change any settings.</li>
+    <li><strong>Editor</strong> – can view data and change device settings.</li>
+  </ul>
+  <p class="faq-a">The invited user will need to have a Battery Remote account. Once added, the device will appear in their device list automatically.</p>
+
+  <p class="faq-q">Why are device settings greyed out for my account?</p>
+  <p class="faq-a">
+    Settings are read-only when you have <strong>Viewer</strong> access to a device. Only the device owner or users with <strong>Editor</strong> access can change settings.
+    If you need to adjust settings, ask the device owner to upgrade your role to Editor in <strong>Device Settings → Access</strong>.
+  </p>
+
+  <h2>Device Settings</h2>
+
+  <p class="faq-q">Where do I enable motion detection and geofencing?</p>
+  <p class="faq-a">
+    Open your device and go to <strong>Device Settings → Alerts</strong>. From there you can:
+  </p>
+  <ul>
+    <li><strong>Motion Detection</strong> – toggle on to receive a notification when the tracker detects movement.</li>
+    <li><strong>Geofencing</strong> – define a zone on the map. You will be notified when the device enters or leaves the zone.</li>
+  </ul>
+
+  <p class="faq-q">What gets logged, and how do I change it?</p>
+  <p class="faq-a">
+    Battery Remote can log different categories of events. To configure logging, go to <strong>Device Settings → Logging</strong>. You can independently enable or disable:
+  </p>
+  <ul>
+    <li><strong>Warnings</strong> – low voltage, over-temperature, and other system alerts.</li>
+    <li><strong>Charging Info</strong> – charge start/stop events and state-of-charge snapshots.</li>
+    <li><strong>Motion Events</strong> – movement detected by the tracker's accelerometer.</li>
+  </ul>
+  <p class="faq-a">Disabling a category stops new events from being stored but does not delete existing history.</p>
+
+  <p class="faq-q">My tracker is not connected to the 12 V battery — how do I prevent it from draining its internal battery?</p>
+  <p class="faq-a">
+    If the tracker is not permanently wired to a 12 V supply, you should switch off the tracker from the app when it is not in use.
+    Go to <strong>Device Settings → Power</strong> and toggle <strong>Tracker Power</strong> to off.
+    This sends a remote command to the tracker to enter deep sleep, conserving its internal battery.
+    The tracker will only wake again when it next receives power on the 12 V supply or USB.
+  </p>
+
+  <h2>Advanced – EMU Parameters &amp; CAN Bus</h2>
+
+  <p class="faq-q">How do I change EMU parameters?</p>
+  <p class="faq-a">
+    EMU (Energy Management Unit) parameters can be adjusted in <strong>Device Settings → EMU Configuration</strong>.
+  </p>
+  <p class="warning">
+    <strong>⚠ Warning:</strong> Changing EMU parameters directly affects how the battery management system interprets cell data.
+    Incorrect values can cause the BMS to report false readings, suppress real warnings, or damage the battery.
+    Only change these values if you fully understand what each parameter does and have verified the correct values for your specific battery pack.
+    When in doubt, contact support before making changes. Parameters can not be changed during charging.
+  </p>
+
+  <p class="faq-q">How do I send a manual CAN message?</p>
+  <p class="faq-a">
+    Manual CAN messages can be sent from <strong>Device Settings → CAN Bus → Send Manual Message</strong>.
+    Enter the CAN ID (in hexadecimal, e.g. <code>0x18FF50E5</code>), the data bytes, count and periode, then tap <strong>Send</strong>.
+    If the request is valid tracker will imidiately start sending the specified CAN message at the defined interval. You can stop it at any time by sending same request with count set to 0.
+  </p>
+  <p class="warning">
+    <strong>⚠ Warning:</strong> Sending arbitrary CAN messages to your vehicle or BMS can trigger unintended behaviour, including activating relays, resetting modules, or corrupting calibration data.
+    Only use this feature if you know the CAN frame format for your system. Do not guess frame contents.
+  </p>
+
+  <h2>Custom Dashboard</h2>
+
+  <p class="faq-q">Why can't I customise the dashboard yet?</p>
+  <p class="faq-a">
+    The custom dashboard feature is only available after a device has been successfully connected and has sent its first data packet to the app.
+    Once the device is online, a <strong>Customise</strong> button will appear at the top of the Dashboard screen.
+  </p>
+
+  <p class="faq-q">How do I add a panel or a new page to the dashboard?</p>
+  <p class="faq-a">
+    After your device is connected, tap <strong>Customise</strong> on the Dashboard screen to enter edit mode. From there:
+  </p>
+  <ul>
+    <li><strong>Add a panel</strong> – tap the <strong>+ Add Panel</strong> button on the current page, choose a panel type (e.g. voltage gauge, temperature chart, GPS map), and configure its data source.</li>
+    <li><strong>Add a page</strong> – tap the <strong>+ New Page</strong> button and a new tab will be added to the end of the tab list.</li>
+    <li><strong>Reorder panels</strong> – long-press a panel and drag it to a new position.</li>
+    <li><strong>Delete a panel or page</strong> – tap the <strong>✕</strong> icon that appears on each panel in edit mode, or swipe left on the page tab to delete a whole page.</li>
+  </ul>
+  <p class="faq-a">Tap <strong>Done</strong> to save your layout and exit edit mode.</p>
+
   <h2>Frequently Asked Questions</h2>
 
   <p class="faq-q">Why is my device data not updating?</p>
@@ -36,12 +160,6 @@
 
   <p class="faq-q">My location is shown incorrectly on the map.</p>
   <p class="faq-a">The location displayed is the last known location reported by your device. If your device has been moved without an active data connection, the location may be outdated. The timestamp is shown next to the location.</p>
-
-  <p class="faq-q">How do I delete my account and data?</p>
-  <p class="faq-a">Send a deletion request to <a href="mailto:minoseigenheer@gmail.com">minoseigenheer@gmail.com</a> with the subject "Account Deletion Request". All your data will be permanently removed within 30 days.</p>
-
-  <p class="faq-q">I forgot my password.</p>
-  <p class="faq-a">On the login screen, tap <strong>"Forgot password?"</strong> and enter your email address. You will receive a reset link by email. If you signed in with Google or Apple, use those services to manage your credentials.</p>
 
   <p class="faq-q">The app crashes or shows an error.</p>
   <p class="faq-a">Try force-quitting and reopening the app. If the problem persists, delete and reinstall the app. If the issue continues, please email us with a description of what happened and your iOS version.</p>
