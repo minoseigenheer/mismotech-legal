@@ -8,81 +8,132 @@
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 760px; margin: 40px auto; padding: 0 20px; color: #333; line-height: 1.7; }
     h1 { font-size: 2em; margin-bottom: 0.2em; }
     h2 { font-size: 1.2em; margin-top: 2em; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px; }
+    h3 { font-size: 1em; margin-top: 1.4em; margin-bottom: 0.2em; }
     a  { color: #007aff; }
     .meta { color: #888; font-size: 0.9em; margin-bottom: 2em; }
+    table { border-collapse: collapse; width: 100%; margin-top: 0.6em; }
+    td, th { border: 1px solid #ddd; padding: 8px 10px; vertical-align: top; font-size: 0.92em; }
+    th { background: #f5f5f5; }
   </style>
 </head>
 <body>
 
   <h1>Privacy Policy</h1>
-  <p class="meta">App: <strong>Battery Remote</strong> &nbsp;|&nbsp; Developer: <strong>MISMOtech Minos Eigenheer</strong> &nbsp;|&nbsp; Last updated: May 30, 2026</p>
+  <p class="meta">App: <strong>Battery Remote</strong> &nbsp;|&nbsp; Developer: <strong>MISMOtech Minos Eigenheer</strong> &nbsp;|&nbsp; Last updated: 1 June 2026</p>
 
-  <p>This Privacy Policy explains how <strong>MISMOtech - Minos Eigenheer</strong> ("we", "us", or "our") collects, uses, and protects your information when you use the <strong>Battery Remote</strong> application.</p>
+  <p>This Privacy Policy explains how <strong>MISMOtech – Minos Eigenheer</strong> ("we", "us", or "our"), as the data controller, collects, uses, and protects your personal data when you use the <strong>Battery Remote</strong> mobile application ("the App"). It applies to users in the European Economic Area (EEA) and other jurisdictions, and is written in accordance with the EU General Data Protection Regulation (GDPR) and the Dutch implementation thereof (Uitvoeringswet AVG).</p>
 
-  <h2>1. Information We Collect</h2>
-  <h3>Account &amp; Authentication Data</h3>
+  <h2>1. Who Is Responsible for Your Data (Controller)</h2>
+  <p>
+    <strong>MISMOtech – Minos Eigenheer</strong><br />
+    the Netherlands<br />
+    <a href="mailto:minoseigenheer@gmail.com">minoseigenheer@gmail.com</a>
+  </p>
+
+  <h2>2. Data We Collect and Legal Basis</h2>
+  <p>The table below summarises the categories of personal data we process, why we process them, and the legal basis under GDPR / nDSG.</p>
+
+  <table>
+    <tr>
+      <th>Category</th>
+      <th>Examples</th>
+      <th>Purpose</th>
+      <th>Legal Basis (GDPR Art. 6)</th>
+    </tr>
+    <tr>
+      <td>Account &amp; identity data</td>
+      <td>Email address, display name, profile photo; Apple may supply a relay address</td>
+      <td>Authentication and account management</td>
+      <td>Art. 6(1)(b) – performance of a contract</td>
+    </tr>
+    <tr>
+      <td>Device location data</td>
+      <td>GPS coordinates published by the tracker via Particle Cloud events (transient, TTL ~60 s in the Particle event stream); Particle retains device vitals for up to <strong>1 month</strong></td>
+      <td>Displaying live and last-known device location on the map</td>
+      <td>Art. 6(1)(b) – performance of a contract</td>
+    </tr>
+    <tr>
+      <td>Device telemetry</td>
+      <td>Battery voltage, state of charge, charging state, temperature, warnings, motion events; stored in Firestore for <strong>90 days</strong></td>
+      <td>Dashboard, historical logs, and alert delivery</td>
+      <td>Art. 6(1)(b) – performance of a contract</td>
+    </tr>
+    <tr>
+      <td>Push notification token</td>
+      <td>Firebase Cloud Messaging (FCM) token linked to your account</td>
+      <td>Delivering push notifications (e.g. charge complete, warnings)</td>
+      <td>Art. 6(1)(b) – performance of a contract</td>
+    </tr>
+    <tr>
+      <td>Technical &amp; diagnostic data</td>
+      <td>Crash reports, app version, operating system version</td>
+      <td>Diagnosing errors and improving app reliability</td>
+      <td>Art. 6(1)(f) – legitimate interests (product quality)</td>
+    </tr>
+  </table>
+
+  <p>We do <strong>not</strong> sell, rent, or share your personal data with third parties for marketing or advertising purposes.</p>
+
+  <h2>3. How We Use Your Information</h2>
   <ul>
-    <li>Email address, display name, and profile photo (when signing in with Email, Google, or Apple).</li>
-    <li>Apple Sign In may share a relay email address instead of your real email at your discretion.</li>
-  </ul>
-
-  <h3>Location Data</h3>
-  <ul>
-    <li>The app retrieves the location of your tracker device via a Particle Cloud publish event.</li>
-    <li>Particle Cloud publish events are transient (TTL ~60 seconds in the cloud event stream)</li>
-    <li>Location information and device vitals are retained by Particle for up to <strong>1 month</strong>.</li>
-  </ul>
-
-  <h3>Device &amp; Usage Data</h3>
-  <ul>
-    <li>Battery level, charging state, warnings, and other telemetry data transmitted from your device.</li>
-    <li>Logs and events you enable in the app (e.g. charge sessions, warnings, motion events...) get published to a Firestore database.</li>
-    <li>Logs are stored for 90 days and can be accessed by the owner of the device and all users you grant access to.</li>
-    <li>We do not collect any personally identifiable information from these logs.</li>
-  </ul>
-
-  <h3>Push Notifications</h3>
-  <ul>
-    <li>A Firebase Cloud Messaging (FCM) token is stored to deliver push notifications (e.g. charge complete, warnings).</li>
-  </ul>
-
-  <h2>2. How We Use Your Information</h2>
-  <ul>
-    <li>To authenticate you and secure access to your account.</li>
-    <li>To display real-time and historical battery data on your dashboard.</li>
+    <li>To authenticate you and protect access to your account and devices.</li>
+    <li>To display real-time and historical battery and device data on your dashboard.</li>
     <li>To send push notifications about your device's status.</li>
+    <li>To enable you to grant other users access to your devices.</li>
     <li>To improve app reliability and diagnose technical issues.</li>
   </ul>
-  <p>We do <strong>not</strong> sell, rent, or share your personal information with third parties for marketing purposes.</p>
 
-  <h2>3. Data Storage &amp; Security</h2>
-  <p>Your data is stored in <strong>Google Firebase</strong> (Firestore and Authentication), protected by Firebase security rules that restrict access to your account only. Data is transmitted over encrypted HTTPS connections. We apply reasonable technical and organizational measures to protect your information.</p>
-
-  <h2>4. Third-Party Services</h2>
-  <p>Battery Remote uses the following third-party services, each with their own privacy policies:</p>
+  <h2>4. Data Storage, Security &amp; Retention</h2>
+  <p>Your data is stored in <strong>Google Firebase</strong> (Firestore, Authentication, Cloud Functions, and Cloud Messaging). Access is restricted by Firestore security rules so that only you and users you have explicitly authorised can read your device data. All data in transit is protected by TLS/HTTPS encryption. We apply reasonable technical and organisational measures to safeguard your information.</p>
   <ul>
-    <li><a href="https://firebase.google.com/support/privacy" target="_blank">Google Firebase</a> (authentication, database, cloud functions, push notifications)</li>
-    <li><a href="https://policies.google.com/privacy" target="_blank">Google Sign-In</a></li>
-    <li><a href="https://www.apple.com/legal/privacy/" target="_blank">Apple Sign In</a></li>
-    <li><a href="https://cloud.google.com/maps-platform/terms" target="_blank">Google Maps</a> (for displaying device location)</li>
-    <li><a href="https://www.particle.io/legal/privacy/" target="_blank">Particle Industries</a> (IoT device cloud — event transport and device vitals, retained up to 1 month)</li>
+    <li><strong>Account data</strong> – retained until you delete your account.</li>
+    <li><strong>Device telemetry logs</strong> – retained for 90 days, then automatically deleted.</li>
+    <li><strong>Particle device vitals</strong> – retained by Particle for up to 1 month (outside our control).</li>
+    <li><strong>FCM tokens</strong> – deleted when you sign out or delete your account.</li>
   </ul>
 
-  <h2>5. Data Retention</h2>
-  <p>Your data is retained as long as your account is active. You may request deletion of your account and associated data at any time by contacting us at the email below. Data will be permanently deleted within 30 days of your request.</p>
+  <h2>5. International Data Transfers</h2>
+  <p>Some of the third-party services we rely on are headquartered in the United States, meaning your data may be transferred to and processed in the US or other countries outside the EEA. Where required by law, these transfers are protected by appropriate safeguards, including the EU Standard Contractual Clauses (SCCs) as adopted by the European Commission:</p>
+  <ul>
+    <li><strong>Google Firebase &amp; Google Sign-In</strong> – Google LLC, USA. <a href="https://cloud.google.com/terms/data-processing-addendum" target="_blank">Google Data Processing Addendum (SCCs)</a></li>
+    <li><strong>Particle Industries</strong> – Particle Industries, Inc., USA. <a href="https://www.particle.io/legal/privacy/" target="_blank">Particle Privacy Policy</a></li>
+    <li><strong>Apple Sign In</strong> – Apple Inc., USA. <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple Privacy Policy</a></li>
+    <li><strong>Google Maps</strong> – Google LLC, USA. <a href="https://cloud.google.com/maps-platform/terms" target="_blank">Google Maps Platform Terms</a></li>
+  </ul>
 
   <h2>6. Children's Privacy</h2>
-  <p>Battery Remote is not intended for use by children under the age of 13. We do not knowingly collect personal information from children under 13.</p>
+  <p>Battery Remote is not intended for children under the age of <strong>16</strong> (or the minimum age required by the applicable law of your country of residence, if higher). We do not knowingly collect personal data from children below this age. If you believe a child has provided us with personal data, please contact us so we can delete it.</p>
 
   <h2>7. Your Rights</h2>
-  <p>Depending on your jurisdiction, you may have the right to access, correct, or delete your personal data. To exercise these rights, please contact us.</p>
+  <p>Depending on your location, you have the following rights regarding your personal data. To exercise any of them, contact us at the address in Section 9.</p>
+  <ul>
+    <li><strong>Right of access (Art. 15 GDPR)</strong> – Request a copy of the personal data we hold about you.</li>
+    <li><strong>Right to rectification (Art. 16 GDPR)</strong> – Ask us to correct inaccurate or incomplete data.</li>
+    <li><strong>Right to erasure (Art. 17 GDPR)</strong> – Request deletion of your personal data. You can also do this directly in the app via <em>Settings → Account → Delete Account</em>.</li>
+    <li><strong>Right to restriction (Art. 18 GDPR)</strong> – Ask us to restrict processing of your data in certain circumstances.</li>
+    <li><strong>Right to data portability (Art. 20 GDPR)</strong> – Receive your personal data in a structured, commonly used, machine-readable format.</li>
+    <li><strong>Right to object (Art. 21 GDPR)</strong> – Object to processing based on our legitimate interests.</li>
+    <li><strong>Right to withdraw consent</strong> – Where processing is based on your consent, you may withdraw it at any time without affecting the lawfulness of prior processing.</li>
+  </ul>
+  <p>We will respond to your request within <strong>30 days</strong>. We may ask you to verify your identity before fulfilling a request.</p>
 
-  <h2>8. Changes to This Policy</h2>
-  <p>We may update this Privacy Policy from time to time. We will notify you of significant changes via the app or by updating the "Last updated" date above.</p>
+  <h2>8. Right to Lodge a Complaint</h2>
+  <p>If you believe we have violated applicable data protection law, you have the right to file a complaint with the competent supervisory authority:</p>
+  <ul>
+    <li><strong>the Netherlands:</strong> <a href="https://www.autoriteitpersoonsgegevens.nl" target="_blank">Autoriteit Persoonsgegevens (AP)</a></li>
+    <li><strong>Other EU/EEA countries:</strong> The data protection authority of your country of residence. A list of EU DPAs is available at <a href="https://edpb.europa.eu/about-edpb/about-edpb/members_en" target="_blank">edpb.europa.eu</a>.</li>
+  </ul>
 
-  <h2>9. Contact Us</h2>
-  <p>If you have any questions about this Privacy Policy, please contact:<br />
-  <strong>MISMOtech Minos Eigenheer</strong><br />
+  <h2>9. Automated Decision-Making</h2>
+  <p>We do not use your personal data for automated decision-making or profiling that produces legal or similarly significant effects on you.</p>
+
+  <h2>10. Changes to This Policy</h2>
+  <p>We may update this Privacy Policy from time to time to reflect changes to our practices or applicable law. We will notify you of material changes via the app or by updating the "Last updated" date at the top. Continued use of the App after changes are published constitutes your acceptance of the updated policy.</p>
+
+  <h2>11. Contact Us</h2>
+  <p>For any questions about this Privacy Policy or to exercise your rights, please contact:<br />
+  <strong>MISMOtech – Minos Eigenheer</strong><br />
+  the Netherlands<br />
   <a href="mailto:minoseigenheer@gmail.com">minoseigenheer@gmail.com</a></p>
 
 </body>
