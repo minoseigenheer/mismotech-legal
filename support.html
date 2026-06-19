@@ -31,9 +31,14 @@
 
   <p class="faq-q">How do I add a device to my account?</p>
   <p class="faq-a">
-    To add a tracker to your account, go to the <strong>Devices</strong> tab and tap the <strong>+</strong> button.
-    You will be prompted to enter the <strong>serial number</strong> printed on the label of your tracker.
-    The app uses the serial number to look up the unique device ID in the system — no manual ID entry is needed.
+    Go to the <strong>Devices</strong> tab and tap the <strong>+</strong> button. You have two ways to enter the serial number:
+  </p>
+  <ul>
+    <li><strong>Scan with camera</strong> – tap the camera icon and point your phone at the barcode or QR code on the label of your tracker. The serial number is filled in automatically. The app needs <strong>camera permission</strong> for this (see <em>App Permissions</em> below).</li>
+    <li><strong>Type manually</strong> – enter the serial number exactly as printed on the label (including any capital letters).</li>
+  </ul>
+  <p class="faq-a">
+    The app uses the serial number to look up the unique device ID — no manual ID entry is needed.
     Once found, the device will be added to your account and will appear on your dashboard.
   </p>
 
@@ -43,6 +48,26 @@
     The tracker must have been registered in the system before it can be paired.
     If the problem persists, contact support with your serial number and we will check the registration status.
   </p>
+
+  <h2>App Permissions</h2>
+
+  <p class="faq-q">What permissions does Battery Remote need and why?</p>
+  <p class="faq-a">Battery Remote requests the following system permissions:</p>
+  <ul>
+    <li><strong>Camera</strong> – used to scan the serial number barcode or QR code when adding a device. The camera is only activated when you tap the scan button; no images are captured or stored.</li>
+    <li><strong>Push Notifications</strong> – used to deliver motion alerts, geofence entry/exit events, and low-battery warnings. You can control which alert types are sent in <strong>Device Settings → Alerts</strong>.</li>
+    <li><strong>Location (when in use)</strong> – only requested when you open the map to set up a geofence zone. The app does not track your phone's location in the background.</li>
+    <li><strong>Motion &amp; Fitness (iOS) / Physical Activity (Android)</strong> – not used by the app directly. The motion alerts in Battery Remote come from the tracker's own accelerometer, not your phone's sensors.</li>
+  </ul>
+
+  <p class="faq-q">I denied a permission by mistake. How do I re-enable it?</p>
+  <p class="faq-a">
+    Open your phone's <strong>Settings</strong> app, find <strong>Battery Remote</strong> in the app list, and toggle the permission back on.
+  </p>
+  <ul>
+    <li><strong>iOS:</strong> Settings → Privacy &amp; Security → [Camera / Notifications / Location Services]</li>
+    <li><strong>Android:</strong> Settings → Apps → Battery Remote → Permissions</li>
+  </ul>
 
   <h2>Account Management</h2>
 
@@ -58,23 +83,35 @@
 
   <h2>Access &amp; Sharing</h2>
 
+  <p class="faq-q">What are the different user roles and what can each role do?</p>
+  <p class="faq-a">Every user on a device has one of four roles, listed from most to least access:</p>
+  <ul>
+    <li><strong>Owner</strong> – full control. Can view all data, change every device setting (features, EMUS parameters, CAN bus, power, alerts), manage other users' access, and delete the device from the system. There is exactly one owner per device.</li>
+    <li><strong>Admin</strong> – trusted co-administrator. Has the same day-to-day access as the Owner: can view data, change all device settings, manage other users' access, and use advanced features (EMUS configuration, CAN bus). The only difference from Owner is that an Admin cannot delete the device or transfer ownership.</li>
+    <li><strong>User</strong> – standard interactive role. Can view live data, history, and the map, and can interact with device controls (e.g. adjust charge settings). Cannot open Device Settings, change feature flags, or manage other users.</li>
+    <li><strong>Viewer</strong> – read-only. Can see live data, history, and the map, but cannot interact with any controls, change settings, or send any commands to the device.</li>
+  </ul>
+
   <p class="faq-q">How do I grant another user access to my device?</p>
   <p class="faq-a">
     Open the device you want to share and go to <strong>Device Settings → Access</strong>.
-    Tap <strong>Add User</strong> and enter the email address of the person you want to invite.
-    You can assign them one of two roles:
+    Tap <strong>Add User</strong>, enter the email address of the person you want to invite, and choose their role (see above).
+    The invited user must already have a Battery Remote account. Once added, the device will appear in their device list automatically.
   </p>
-  <ul>
-    <li><strong>Viewer</strong> – can see live data and history but cannot change any settings.</li>
-    <li><strong>Editor</strong> – can view data and change device settings.</li>
-  </ul>
-  <p class="faq-a">The invited user will need to have a Battery Remote account. Once added, the device will appear in their device list automatically.</p>
 
   <p class="faq-q">Why are device settings greyed out for my account?</p>
   <p class="faq-a">
-    Settings are read-only when you have <strong>Viewer</strong> access to a device. Only the device owner or users with <strong>Editor</strong> access can change settings.
-    If you need to adjust settings, ask the device owner to upgrade your role to Editor in <strong>Device Settings → Access</strong>.
+    Device Settings are only accessible to <strong>Owner</strong> and <strong>Admin</strong> users.
+    If your role is <strong>User</strong> or <strong>Viewer</strong>, the settings icon will not open the settings sheet.
+    Ask the device owner to upgrade your role in <strong>Device Settings → Access</strong>.
   </p>
+
+  <p class="faq-q">Why are the charging controls greyed out or unavailable?</p>
+  <p class="faq-a">There are two reasons the charging controls may be disabled:</p>
+  <ul>
+    <li><strong>Viewer role</strong> – if you have read-only access, all interactive controls (including charging) are locked. Ask the device owner to change your role to <strong>User</strong>, <strong>Admin</strong>, or <strong>Owner</strong> in <strong>Device Settings → Access</strong>.</li>
+    <li><strong>CCU Requests disabled</strong> – if the <strong>CCU Requests</strong> feature is turned off in <strong>Device Settings → Features</strong>, the tracker stops communicating with the Charging Control Unit and the charging controls are locked for all users. Only an Owner or Admin can re-enable this feature.</li>
+  </ul>
 
   <h2>Device Settings</h2>
 
@@ -83,9 +120,36 @@
     Open your device and go to <strong>Device Settings → Alerts</strong>. From there you can:
   </p>
   <ul>
-    <li><strong>Motion Detection</strong> – toggle on to receive a notification when the tracker detects movement.</li>
-    <li><strong>Geofencing</strong> – define a zone on the map. You will be notified when the device enters or leaves the zone.</li>
+    <li><strong>Motion Detection</strong> – toggle on to receive a push notification when the tracker's accelerometer detects movement.</li>
+    <li><strong>Geofencing</strong> – define a circular zone on the map. You will be notified when the device enters or exits that zone.</li>
   </ul>
+
+  <p class="faq-q">How does geofencing work?</p>
+  <p class="faq-a">
+    A geofence is a virtual boundary drawn on the map around a location (e.g. your garage or parking spot).
+    When your tracker crosses that boundary, the app sends a push notification to all users who have notifications enabled for that device.
+  </p>
+  <p class="faq-a">To set up a geofence:</p>
+  <ol>
+    <li>Go to <strong>Device Settings → Geofence</strong> and enable the toggle.</li>
+    <li>Tap <strong>Set Zone</strong> to open the map. Drag the centre pin to the desired location and adjust the radius slider.</li>
+    <li>Tap <strong>Save</strong>. The tracker will now report entry and exit events.</li>
+  </ol>
+  <p class="faq-a">
+    Geofence detection requires GPS to be enabled on the device (see <strong>Device Settings → Features → GPS Tracking</strong>).
+    The app requests <strong>location permission</strong> to display the map while you configure the zone.
+  </p>
+
+  <p class="faq-q">Where do I see the BMS and Charge Controller hardware and firmware version?</p>
+  <p class="faq-a">
+    Tap on a device to open its dashboard, then tap the <strong>info (ⓘ) icon</strong> or the device name in the header to open the <strong>Device Detail</strong> screen.
+    This screen lists hardware revision and firmware version for:
+  </p>
+  <ul>
+    <li><strong>BMS (Battery Management System)</strong> – hardware revision and firmware version as reported by the EMUS unit over CAN.</li>
+    <li><strong>Charge Controller (CCU)</strong> – hardware and firmware version of the connected Charging Control Unit.</li>
+  </ul>
+  <p class="faq-a">This information is useful when contacting support or verifying compatibility with a firmware update.</p>
 
   <p class="faq-q">What gets logged, and how do I change it?</p>
   <p class="faq-a">
@@ -104,6 +168,33 @@
     Go to <strong>Device Settings → Power</strong> and toggle <strong>Tracker Power</strong> to off.
     This sends a remote command to the tracker to enter deep sleep, conserving its internal battery.
     The tracker will only wake again when it next receives power on the 12 V supply or USB.
+  </p>
+
+  <h2>Device Features</h2>
+
+  <p class="faq-q">What are device features and where do I find them?</p>
+  <p class="faq-a">
+    Device features let you enable or disable specific hardware capabilities of your tracker.
+    Go to <strong>Device Settings → Features</strong> (requires Owner or Admin role) to toggle each one.
+    The four features are:
+  </p>
+  <ul>
+    <li><strong>GPS Tracking</strong> (<code>gpsEn</code>) – when enabled, the tracker reports its location. Disabling this stops all GPS data from being sent or stored, and the map will not update. Useful for stationary installations where GPS is not relevant.</li>
+    <li><strong>CCU Requests</strong> (<code>ccuEn</code>) – controls whether the tracker actively communicates with the Charging Control Unit. Disabling it turns off the charging tab controls and prevents the tracker from polling charging state.</li>
+    <li><strong>BMS Requests</strong> (<code>bmsReqEn</code>) – controls whether the tracker polls the Battery Management System for cell data. If disabled, battery values (SoC, voltage, temperature, etc.) will remain at their initial defaults until this is re-enabled. A warning banner is shown on the dashboard and custom panels while BMS data is unavailable.</li>
+    <li><strong>CAN Read-Only</strong> (<code>canRO</code>) – when enabled, the tracker only reads from the CAN bus and does not send any CAN frames. EMUS parameter writes and manual CAN messages are blocked in the app while this mode is active. A "CAN read-only" indicator appears in the custom dashboard top bar.</li>
+  </ul>
+
+  <p class="faq-q">Will disabling a feature affect other users sharing the same device?</p>
+  <p class="faq-a">
+    Yes. Feature settings are stored on the device record and apply to everyone who has access to the device.
+    Changing a feature flag requires <strong>Owner</strong> or <strong>Admin</strong> role.
+  </p>
+
+  <p class="faq-q">Why does the dashboard show a "BMS requests off" warning?</p>
+  <p class="faq-a">
+    This banner appears when <strong>BMS Requests</strong> is disabled and the tracker has not yet received real BMS data in this session (values are still at firmware defaults).
+    Once BMS requests are re-enabled and the tracker has successfully polled the BMS, the banner disappears automatically.
   </p>
 
   <h2>Advanced – EMUS Parameters &amp; CAN Bus</h2>
@@ -158,11 +249,50 @@
   <p class="faq-q">I'm not receiving push notifications.</p>
   <p class="faq-a">Go to your phone's <strong>Settings → Battery Remote → Notifications</strong> and ensure notifications are enabled. Also check that notifications are enabled within the app settings.</p>
 
-  <p class="faq-q">My location is shown incorrectly on the map.</p>
-  <p class="faq-a">The location displayed is the last known location reported by your device. If your device has been moved without an active data connection, the location may be outdated. The timestamp is shown next to the location.</p>
+  <p class="faq-q">The GPS location is not updating even though the device has moved.</p>
+  <p class="faq-a">
+    Battery Remote only publishes a new GPS position when the device has moved a significant distance from the previously recorded location.
+    This distance threshold is configurable in <strong>Device Settings → Publish</strong> and avoids flooding the server with updates caused by minor vibrations or GPS signal drift.
+  </p>
+  <p class="faq-a">If the map has not updated after a substantial move, check the following:</p>
+  <ul>
+    <li><strong>GPS Tracking enabled?</strong> – go to <strong>Device Settings → Features</strong> and confirm <em>GPS Tracking</em> is on.</li>
+    <li><strong>Data connection?</strong> – the tracker needs an active cellular connection to send the location. Check the signal indicator on the device card.</li>
+    <li><strong>Refresh</strong> – pull down on the dashboard to fetch the latest stored location from the server.</li>
+  </ul>
+  <p class="faq-a">The timestamp of the last known position is always shown next to the location marker on the map.</p>
 
   <p class="faq-q">The app crashes or shows an error.</p>
   <p class="faq-a">Try force-quitting and reopening the app. If the problem persists, delete and reinstall the app. If the issue continues, please email us with a description of what happened and your iOS version.</p>
+
+  <h2>Logs</h2>
+
+  <p class="faq-q">How do I view event logs?</p>
+  <p class="faq-a">
+    Tap the <strong>Logs</strong> tab at the bottom of the screen. The list shows events across all your devices, newest first.
+    Each entry displays the event type (warning, charging, motion), the device it came from, and a timestamp.
+    Tap an entry to see the full event detail.
+  </p>
+
+  <p class="faq-q">I can't see logs from one of my devices.</p>
+  <p class="faq-a">
+    The log list supports per-device filtering. Tap the <strong>filter icon</strong> at the top of the Logs screen and make sure the device you are looking for is selected.
+    When no filter is active, events from all devices are shown; when specific devices are selected, only those events appear.
+  </p>
+  <p class="faq-a">Also check that logging is enabled for the event types you expect — go to <strong>Device Settings → Logging</strong> and verify that <em>Warnings</em>, <em>Charging Info</em>, and/or <em>Motion Events</em> are toggled on for that device.</p>
+
+  <p class="faq-q">How long are logs kept?</p>
+  <p class="faq-a">
+    Event logs (warnings, charging events, motion events) are stored for <strong>90 days</strong> and then automatically deleted.
+    There is no way to recover logs after this period, so if you need to keep a record of specific events, note them down before they expire.
+  </p>
+
+  <p class="faq-q">Can I search through the logs?</p>
+  <p class="faq-a">
+    Yes. Tap the <strong>search icon</strong> at the top of the Logs screen and type a keyword.
+    The list filters in real time to show only entries whose description or device name matches your search.
+    You can combine the search with device filters to narrow the results further.
+  </p>
 
   <h2>App Information</h2>
   <ul>

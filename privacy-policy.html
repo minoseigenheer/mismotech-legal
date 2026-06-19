@@ -19,7 +19,7 @@
 <body>
 
   <h1>Privacy Policy</h1>
-  <p class="meta">App: <strong>Battery Remote</strong> &nbsp;|&nbsp; Developer: <strong>MISMOtech Minos Eigenheer</strong> &nbsp;|&nbsp; Last updated: 1 June 2026</p>
+  <p class="meta">App: <strong>Battery Remote</strong> &nbsp;|&nbsp; Developer: <strong>MISMOtech Minos Eigenheer</strong> &nbsp;|&nbsp; Last updated: 19 June 2026</p>
 
   <p>This Privacy Policy explains how <strong>MISMOtech – Minos Eigenheer</strong> ("we", "us", or "our"), as the data controller, collects, uses, and protects your personal data when you use the <strong>Battery Remote</strong> mobile application ("the App"). It applies to users in the European Economic Area (EEA) and other jurisdictions, and is written in accordance with the EU General Data Protection Regulation (GDPR) and the Dutch implementation thereof (Uitvoeringswet AVG).</p>
 
@@ -53,6 +53,12 @@
       <td>Art. 6(1)(b) – performance of a contract</td>
     </tr>
     <tr>
+      <td>Geofence zone</td>
+      <td>Centre coordinates (latitude/longitude) and radius of any geofence zones you configure, stored in Firestore as part of device settings</td>
+      <td>Triggering entry/exit notifications when the tracker crosses the defined boundary</td>
+      <td>Art. 6(1)(b) – performance of a contract</td>
+    </tr>
+    <tr>
       <td>Device telemetry</td>
       <td>Battery voltage, state of charge, charging state, temperature, warnings, motion events; stored in Firestore for <strong>90 days</strong></td>
       <td>Dashboard, historical logs, and alert delivery</td>
@@ -63,6 +69,18 @@
       <td>Firebase Cloud Messaging (FCM) token linked to your account</td>
       <td>Delivering push notifications (e.g. charge complete, warnings)</td>
       <td>Art. 6(1)(b) – performance of a contract</td>
+    </tr>
+    <tr>
+      <td>Camera (transient)</td>
+      <td>Camera viewfinder frames used to decode a serial-number barcode or QR code when adding a device. <strong>No images are captured or stored</strong> by the app.</td>
+      <td>Filling in the device serial number automatically during pairing</td>
+      <td>Art. 6(1)(b) – performance of a contract</td>
+    </tr>
+    <tr>
+      <td>Phone location (transient)</td>
+      <td>Your phone’s current location, accessed once when you open the map to configure a geofence zone, so the map can centre on your position. <strong>Not stored</strong> by the app.</td>
+      <td>Providing a convenient starting point when drawing a geofence on the map</td>
+      <td>Art. 6(1)(a) – consent (iOS/Android permission prompt)</td>
     </tr>
     <tr>
       <td>Technical &amp; diagnostic data</td>
@@ -87,7 +105,10 @@
   <p>Your data is stored in <strong>Google Firebase</strong> (Firestore, Authentication, Cloud Functions, and Cloud Messaging). Access is restricted by Firestore security rules so that only you and users you have explicitly authorised can read your device data. All data in transit is protected by TLS/HTTPS encryption. We apply reasonable technical and organisational measures to safeguard your information.</p>
   <ul>
     <li><strong>Account data</strong> – retained until you delete your account.</li>
-    <li><strong>Device telemetry logs</strong> – retained for 90 days, then automatically deleted.</li>
+    <li><strong>Device telemetry logs</strong> – retained for <strong>90 days</strong>, then automatically deleted.</li>
+    <li><strong>Geofence zone data</strong> – retained as part of device settings until you delete the zone or delete the device.</li>
+    <li><strong>Camera frames</strong> – processed on-device in real time for barcode decoding; never stored or transmitted.</li>
+    <li><strong>Phone location (geofence map)</strong> – used transiently on-device to centre the map; never stored or transmitted to our servers.</li>
     <li><strong>Particle device vitals</strong> – retained by Particle for up to 1 month (outside our control).</li>
     <li><strong>FCM tokens</strong> – deleted when you sign out or delete your account.</li>
   </ul>
