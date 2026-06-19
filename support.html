@@ -56,8 +56,8 @@
   <ul>
     <li><strong>Camera</strong> – used to scan the serial number barcode or QR code when adding a device. The camera is only activated when you tap the scan button; no images are captured or stored.</li>
     <li><strong>Push Notifications</strong> – used to deliver motion alerts, geofence entry/exit events, and low-battery warnings. You can control which alert types are sent in <strong>Device Settings → Alerts</strong>.</li>
-    <li><strong>Location (when in use)</strong> – only requested when you open the map to set up a geofence zone. The app does not track your phone's location in the background.</li>
-    <li><strong>Motion &amp; Fitness (iOS) / Physical Activity (Android)</strong> – not used by the app directly. The motion alerts in Battery Remote come from the tracker's own accelerometer, not your phone's sensors.</li>
+    <li><strong>Location (when in use)</strong> – only requested when you open the map to set up a geofence zone. The app does not track your phone's location.</li>
+    <li><strong>Cellular Data</strong> – Battery Remote uses mobile data to connect to the Particle device cloud and Firebase. Required for real-time tracking, push notifications, and remote control features.</li>
   </ul>
 
   <p class="faq-q">I denied a permission by mistake. How do I re-enable it?</p>
@@ -180,9 +180,9 @@
   </p>
   <ul>
     <li><strong>GPS Tracking</strong> (<code>gpsEn</code>) – when enabled, the tracker reports its location. Disabling this stops all GPS data from being sent or stored, and the map will not update. Useful for stationary installations where GPS is not relevant.</li>
-    <li><strong>CCU Requests</strong> (<code>ccuEn</code>) – controls whether the tracker actively communicates with the Charging Control Unit. Disabling it turns off the charging tab controls and prevents the tracker from polling charging state.</li>
-    <li><strong>BMS Requests</strong> (<code>bmsReqEn</code>) – controls whether the tracker polls the Battery Management System for cell data. If disabled, battery values (SoC, voltage, temperature, etc.) will remain at their initial defaults until this is re-enabled. A warning banner is shown on the dashboard and custom panels while BMS data is unavailable.</li>
-    <li><strong>CAN Read-Only</strong> (<code>canRO</code>) – when enabled, the tracker only reads from the CAN bus and does not send any CAN frames. EMUS parameter writes and manual CAN messages are blocked in the app while this mode is active. A "CAN read-only" indicator appears in the custom dashboard top bar.</li>
+    <li><strong>CCU charge controller control</strong> (<code>ccuEn</code>) – controls whether the tracker actively communicates with the Charging Control Unit. Disabling it turns off the charging tab controls to remotely change charging speed or stop/ pause charging.</li>
+    <li><strong>BMS Requests</strong> (<code>bmsReqEn</code>) – controls whether the tracker polls the Battery Management System for cell data. If disabled, battery values (SoC, voltage, temperature, etc.) device is only listening to BMS and BMS needs to periodically broadcast CAN bus messages or other device on the bus requests messages. Not recommended to disable because tracker anyway only requests messages if not received in a few seconds.</li>
+    <li><strong>CAN Read-Only</strong> (<code>canRO</code>) – when enabled, the tracker only listens on the CAN bus and does not send any CAN frames. EMUS frame requests, CCU control, EMUS parameter requests and manual CAN messages are all blocked in the app while this mode is active.</li>
   </ul>
 
   <p class="faq-q">Will disabling a feature affect other users sharing the same device?</p>
@@ -195,30 +195,6 @@
   <p class="faq-a">
     This banner appears when <strong>BMS Requests</strong> is disabled and the tracker has not yet received real BMS data in this session (values are still at firmware defaults).
     Once BMS requests are re-enabled and the tracker has successfully polled the BMS, the banner disappears automatically.
-  </p>
-
-  <h2>Advanced – EMUS Parameters &amp; CAN Bus</h2>
-
-  <p class="faq-q">How do I change EMUS parameters?</p>
-  <p class="faq-a">
-    EMUS (Energy Management Unit System) parameters can be adjusted in <strong>Device Settings → EMUS Configuration</strong>.
-  </p>
-  <p class="warning">
-    <strong>⚠ Warning:</strong> Changing EMUS parameters directly affects how the battery management system interprets cell data.
-    Incorrect values can cause the BMS to report false readings, suppress real warnings, or damage the battery.
-    Only change these values if you fully understand what each parameter does and have verified the correct values for your specific battery pack.
-    When in doubt, contact support before making changes. Parameters can not be changed during charging.
-  </p>
-
-  <p class="faq-q">How do I send a manual CAN message?</p>
-  <p class="faq-a">
-    Manual CAN messages can be sent from <strong>Device Settings → CAN Bus → Send Manual Message</strong>.
-    Enter the CAN ID (in hexadecimal, e.g. <code>0x18FF50E5</code>), the data bytes, count and periode, then tap <strong>Send</strong>.
-    If the request is valid tracker will imidiately start sending the specified CAN message at the defined interval. You can stop it at any time by sending same request with count set to 0.
-  </p>
-  <p class="warning">
-    <strong>⚠ Warning:</strong> Sending arbitrary CAN messages to your vehicle or BMS can trigger unintended behaviour, including activating relays, resetting modules, or corrupting calibration data.
-    Only use this feature if you know the CAN frame format for your system. Do not guess frame contents.
   </p>
 
   <h2>Custom Dashboard</h2>
@@ -262,6 +238,28 @@
   </ul>
   <p class="faq-a">The timestamp of the last known position is always shown next to the location marker on the map.</p>
 
+  <p class="faq-q">How long is GPS location data stored?</p>
+  <p class="faq-a">
+    Battery Remote shows the <strong>last known position</strong> of each device. This location is stored in the Particle cloud and fetched on demand — we do not maintain our own GPS history database.
+    Particle retains device location and diagnostic data for up to <strong>30 days</strong>.
+    After that period the position data may no longer be available, though the map will continue to show the most recently received fix until a newer one arrives.
+  </p>
+
+  <p class="faq-q">How do I follow a specific device on the map?</p>
+  <p class="faq-a">
+    On the <strong>Location</strong> tab, tap a device name in the list on the left, or tap its marker directly on the map.
+    The map will centre on that device and keep it in view while the sheet is open.
+    To stop following, tap elsewhere on the map or dismiss the device sheet.
+  </p>
+
+  <p class="faq-q">Can I see the route or path my device has taken?</p>
+  <p class="faq-a">
+    Yes. Tap a device marker (or its name in the device list) to open the device location sheet.
+    The map will draw the recent location trace — a line connecting the recorded position points — so you can see where the device has been.
+    The trace covers all location points stored for that device in the current session.
+    Because positions are only published when the device moves beyond the configured distance threshold, the trace reflects meaningful movements rather than minor drift.
+  </p>
+
   <p class="faq-q">The app crashes or shows an error.</p>
   <p class="faq-a">Try force-quitting and reopening the app. If the problem persists, delete and reinstall the app. If the issue continues, please email us with a description of what happened and your iOS version.</p>
 
@@ -292,6 +290,30 @@
     Yes. Tap the <strong>search icon</strong> at the top of the Logs screen and type a keyword.
     The list filters in real time to show only entries whose description or device name matches your search.
     You can combine the search with device filters to narrow the results further.
+  </p>
+
+  <h2>Advanced – EMUS Parameters &amp; CAN Frame Sending</h2>
+
+  <p class="faq-q">How do I change EMUS parameters?</p>
+  <p class="faq-a">
+    EMUS (Energy Management Unit System) parameters can be adjusted in <strong>Device Settings → EMUS Configuration</strong>.
+  </p>
+  <p class="warning">
+    <strong>⚠ Warning:</strong> Changing EMUS parameters directly affects how the battery management system interprets cell data.
+    Incorrect values can cause the BMS to report false readings, suppress real warnings, or damage the battery.
+    Only change these values if you fully understand what each parameter does and have verified the correct values for your specific battery pack.
+    When in doubt, contact support before making changes. Parameters can not be changed during charging.
+  </p>
+
+  <p class="faq-q">How do I send a manual CAN message?</p>
+  <p class="faq-a">
+    Manual CAN messages can be sent from <strong>Device Settings → CAN Bus → Send Manual Message</strong>.
+    Enter the CAN ID (in hexadecimal, e.g. <code>0x18FF50E5</code>), the data bytes, count and period, then tap <strong>Send</strong>.
+    If the request is valid, the tracker will immediately start sending the specified CAN message at the defined interval. You can stop it at any time by sending the same request with count set to 0.
+  </p>
+  <p class="warning">
+    <strong>⚠ Warning:</strong> Sending arbitrary CAN messages to your vehicle or BMS can trigger unintended behaviour, including activating relays, resetting modules, or corrupting calibration data.
+    Only use this feature if you know the CAN frame format for your system. Do not guess frame contents.
   </p>
 
   <h2>App Information</h2>
